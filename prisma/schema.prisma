@@ -8,23 +8,23 @@ datasource db {
 }
 
 model Table {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
   cells     Cell[]
 
   @@map("tables")
 }
 
 model Cell {
-  id        Int      @id @default(autoincrement())
-  tableId   Int      @map("table_id")
+  id        Int       @id @default(autoincrement())
+  tableId   Int       @map("table_id")
   row       Int
   column    Int
   value     String
-  updatedAt DateTime @updatedAt
-  table     Table    @relation(fields: [tableId], references: [id])
+  updatedAt DateTime? @updatedAt
+  table     Table     @relation(fields: [tableId], references: [id])
 
   @@map("cells")
 }
